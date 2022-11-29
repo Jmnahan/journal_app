@@ -6,8 +6,7 @@
 #
 one:
   name: "TestingOneTwoThree"
-# column: value
-#
+
 two: 
   name: "TestingTwoThreeFour"
-# column: value
+
