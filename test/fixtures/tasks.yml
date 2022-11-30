@@ -7,10 +7,10 @@
 one: 
   title: "Task one"
   content: "Task one details"
-  category: one
+  category: 1
 
 two: 
   title: "Task one"
   content: "Task one details"
-  category: one
+  category: 1
 

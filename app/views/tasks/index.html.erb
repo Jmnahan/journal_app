@@ -1,0 +1,31 @@
+  <% if @tasks.empty? %>
+    No current tasks
+    <% else %>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th> 
+      <th>Title</th> 
+      <th>Body</th> 
+      <th>Edit</th>
+      <th>Read</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %> </td>
+        <td><%= task.title %> </td>
+        <td><%= task.content %> </td>
+        <td><%= link_to 'Edit', edit_category_task_path(@category, task) %></td>
+        <td><%= link_to 'Read', category_task_path(@category, task) %></td>
+        <td><%= link_to 'Delete', category_task_path(@category, task), method: :delete, data: {turbo_method: :delete, turbo_confirm: 'are you sure?'} %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Create new task?', new_category_task_path %>

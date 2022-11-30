@@ -1,24 +1,55 @@
 class TasksController < ApplicationController
+  before_action :get_task
 
   def index
-  end
-
-  def show
+    @tasks = @category.tasks
   end
 
   def new
+    @task = @category.tasks.build
   end
 
   def create
+    @task = @category.tasks.build(task_params)
+    if @task.save
+      redirect_to category_tasks_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def show
+    @task = @category.tasks.find(params[:id])
   end
 
   def edit
+    @task = @category.tasks.find(params[:id])
   end
 
   def update
+    @task = @category.tasks.find(params[:id])
+    if @task.update(task_params)
+      redirect_to category_tasks_path
+    else 
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @task = @category.tasks.find(params[:id])
+    @task.destroy
+
+    redirect_to category_tasks_path
+  end
+
+  private
+
+  def get_task
+    @category = Category.find(params[:category_id])
+  end
+
+  def task_params
+    params.require(:task).permit(:title, :content, :category_id)
   end
 
 end

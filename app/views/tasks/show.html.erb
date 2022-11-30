@@ -1,0 +1,9 @@
+<p>Show</p>
+<p>
+<%= @task.id %>
+<%= @task.title %>
+<%= @task.content %>
+</p>
+
+<%= link_to 'All task', category_tasks_path(@category, @task) %>
+<%= link_to 'All Category', categories_path(@categories) %>

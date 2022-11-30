@@ -3,7 +3,7 @@ require "test_helper"
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @category = categories(:one)
+    @category = Category.create(name: "This is name")
   end
 
   test "should get index" do

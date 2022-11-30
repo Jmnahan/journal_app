@@ -20,6 +20,7 @@
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
         <td><%= link_to 'Read', category_path(category) %></td>
         <td><%= link_to 'Delete', category_path(category), method: :delete, data: {turbo_method: :delete, turbo_confirm: 'are you sure?'} %></td>
+        <td><%= link_to 'Tasks', category_tasks_path(category) %> </td>
       </tr>
     <% end %>
     <% end %>
