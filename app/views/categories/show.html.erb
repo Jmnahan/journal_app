@@ -1,7 +1,22 @@
-<p>Show</p>
-<p>
-<%= @category.id %>
-<%= @category.name %>
-</p>
+<div class="flex flex-col text-white">
+  <h1 class="text-center font-medium leading-tight text-3xl my-8"><%= @category.name %></h1>
+  <div class="flex">
+    <button 
+      class="px-6 py-2.5 bg-neutral-700 font-medium text-sm leading-tight hover:bg-blue-700
+      focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
+      <%= link_to 'Home', root_path %>
+    </button>
+    <button 
+      class="px-6 py-2.5 bg-neutral-700 font-medium text-sm leading-tight hover:bg-blue-700
+      focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
+      <%= link_to 'Edit Category', edit_category_path(@category) %>
+    </button>
+    <button 
+      class="px-6 py-2.5 bg-neutral-900 font-medium text-sm leading-tight hover:bg-blue-700
+      focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
+      <%= link_to 'Create new task?', new_category_task_path(@category) %>
+    </button>
+  </div>
+  <%= render 'tasks/cat_tasks', :category => @category %>
+</div>
 
-<%= link_to 'All Category', categories_path(@categories) %>

@@ -1,28 +1,32 @@
 <%= form_for task, url: url, method: method do |f| %>
-
-<p>
-  <% if @task.errors.any? %>
-    <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <div class="mb-2">
+      <div>
+        <label class="form-label inline-block mb-2 text-gray-700"><%= f.label :title %></label>
+        <br/>
+        <%= f.text_field :title %>
+      </div>
+      <div class="mt-4">
+        <label class="form-label inline-block mb-2 text-gray-700"><%= f.label :content, "Description" %></label>
+        <br/>
+        <%= f.text_field :content %>
+      </div>
+      <div class="mt-4">
+        <label class="form-label inline-block mb-2 text-gray-700"><%= f.label :priority, "Deadline" %></label>
+        <br/>
+        <%= f.datetime_field :priority %>
+      </div>
+    </div>
+    <small>
+      <% if @task.errors.any? %>
+        <% @task.errors.full_messages.each do |message| %>
+          <p class="my-1 text-gray-700"><%= message %></p>
+        <% end %>
       <% end %>
-    </ul>
-  
-  <% end %>
-</p>
-
-<p>
-  <%= f.label :title %><br/>
-  <%= f.text_field :title %>
-</p>
-
-<p>
-  <%= f.label :content %><br/>
-  <%= f.text_field :content %>
-</p>
-
-<p>
-  <%= f.submit %>
-</p>
-
+    </small>
+    <button 
+      class="px-6 w-full py-2.5 mt-5 bg-neutral-700 text-white self-center font-medium text-sm leading-tight shadow-md
+      hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+      <%= f.submit %>
+    </button>
 <% end %>

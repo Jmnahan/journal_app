@@ -3,7 +3,10 @@ require "test_helper"
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @category = Category.create(name: "This is name")
-    @task = Task.create(title: "Task title", content: "Task content", category_id: @category.id)
+    @task = Task.create(title: "Task title", 
+                        content: "Task content", 
+                        category_id: @category.id, 
+                        priority: "January 1 2023")
   end
 
   test "should get index" do

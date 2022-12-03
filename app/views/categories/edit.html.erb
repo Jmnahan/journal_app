@@ -1,2 +1,17 @@
-<%= render "form", category: @category, url: category_path(@category), method: :patch  %>
-<p>Edit</p>
+<div class="block p-6 rounded-lg shadow-lg bg-zinc-100 max-w-sm">
+  <%= render "form", category: @category, url: category_path(@category), method: :patch  %>
+  <div class="flex flex-row mt-8">
+    <button class="px-6 py-2.5 w-3/6 mr-1 bg-neutral-700 text-white font-medium text-sm leading-tight shadow-md
+      hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+      <%= link_to 'Back', :back %>
+    </button>
+    <button class="px-6 py-2.5 w-3/6 ml-1  bg-neutral-700 text-white font-medium text-sm leading-tight shadow-md
+      hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+      <%= link_to 'Delete', category_path(@category), method: :delete, 
+                                                      data: {turbo_method: :delete, 
+                                                      turbo_confirm: 'are you sure?'} %>
+    </button>
+  </div>
+</div>

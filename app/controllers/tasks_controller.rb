@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :get_task
+  before_action :get_category
 
   def index
     @tasks = @category.tasks
@@ -44,12 +44,12 @@ class TasksController < ApplicationController
 
   private
 
-  def get_task
+  def get_category
     @category = Category.find(params[:category_id])
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :category_id)
+    params.require(:task).permit(:title, :content, :category_id, :priority)
   end
 
 end

@@ -1,22 +1,57 @@
 require "test_helper"
 
 class TaskTest < ActiveSupport::TestCase
-  test "should not save task without name" do
-    task = Task.new
-    task.content = "test"
-    assert_not task.save, "Saved catergory without name"
+
+  setup do
+    @category = Category.create(name: "This is name")
+    @task = Task.create(title: "Task title", 
+                        content: "Task content", 
+                        category_id: @category.id, 
+                        priority: "2024-1-1")
+    @current = DateTime.now                      
   end
 
-  test "should not save task without description" do
+  test "should not save task without title" do
     task = Task.new
-    task.title = "testing"
-    assert_not task.save, "Saved catergory without description"
+    task.content = @task.content
+    task.category_id = @category.id
+    task.priority = Date.parse "2024-1-1"
+    assert_not task.save, "Saved task without title"
   end
 
-  test "should not save task with name less that 5 characters" do
+  test "should not save task without content" do
     task = Task.new
-    task.title = "test"
+    task.title = @task.title
+    task.category_id = @category.id
+    task.priority = Date.parse "2024-1-1"
+    assert_not task.save, "Saved task without content"
+  end
+
+  test "should not save task with content less that 10 characters" do
+    task = Task.new
+    task.title = @task.title
     task.content = "test"
-    assert_not task.save, "Saved catergory with name less that 5 characters"
+    task.category_id = @category.id
+    task.priority = Date.parse "2024-1-1"
+    assert_not task.save, "Saved task with content less that 10 characters"
+  end
+
+  test "should not save task without priority" do
+    task = Task.new
+    task.title = @task.title
+    task.content = "test"
+    task.category_id = @category.id
+    assert_not task.save, "Saved task without priority"
+  end
+
+  test "priority date should not be in the past" do
+    task = Task.new
+    task.title = @task.title
+    task.content = @task.content
+    task.category_id = @category.id
+    task.priority = Date.parse "2000-1-1"
+    if task.priority < @current
+      assert_not task.save, "Saved task even if priority is in the past"
+    end    
   end
 end

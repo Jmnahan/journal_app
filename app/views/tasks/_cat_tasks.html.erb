@@ -1,0 +1,22 @@
+<% if category.tasks.empty? %>
+  <p class="text-center my-8">No current tasks</p>
+<% else %>
+<% category.tasks.each do |task| %>
+    <div class="flex justify-center mt-8">
+      <div class="block rounded-lg shadow-lg bg-zinc-100 max-w-sm px-20 text-center">
+        <div class="py-3 px-6 border-b text-base text-blue-500 border-gray-300 text-gray-700">
+          <%= link_to 'Edit', edit_category_task_path(@category, task) %>
+        </div>
+        <div class="p-2">
+          <h5 class="text-gray-900 text-xl font-medium mb-2"><%= task.title %></h5>
+          <p class="text-gray-700 text-base mb-2">
+            <%= task.content %>
+          </p>
+        </div>
+        <div class="py-3 px-6 border-t text-xs border-gray-300 text-gray-600">
+          <%= task.priority.strftime("%b %d, %y, %l:%M %P") %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
