@@ -16,6 +16,6 @@ class Task < ApplicationRecord
   end
 
   def self.get_priority_tasks_for_today
-    Task.where(priority: Date.today.beginning_of_day..Date.today.end_of_day)
+    Task.where(priority: Date.today.beginning_of_day..Date.today.end_of_day).order(priority: :desc)
   end
 end
