@@ -1,23 +1,20 @@
 <div class="flex w-2/4 flex-col justify-center items-center">
-    <% if @categories.empty? %>
-     <p class="text-center">No current tasks</p>
-      <% else %> 
   <section class="flex items-center justify-center text-white">
-      <% @categories.each do |category| %>
-        <button class="px-6 py-2.5 bg-neutral-700 font-medium text-sm leading-tight hover:bg-blue-700
-        focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
-          <%= link_to "#{category.name}", category_path(category) %>
-        </button>
-      <% end %>
+    <% @categories.each do |category| %>
+      <button class="px-6 py-2.5 bg-neutral-700 font-medium text-sm leading-tight hover:bg-blue-700
+      focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
+        <%= link_to "#{category.name}", category_path(category) %>
+      </button>
     <% end %>
     <button 
-      class="px-6 py-2.5 bg-neutral-900 font-medium text-sm leading-tight hover:bg-blue-700
+      class="px-6 py-2.5 bg-neutral-900 font-medium text-sm text-white leading-tight hover:bg-blue-700
         focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out">
       <%= link_to 'Create new category?', new_category_path %>
     </button>
+    <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "px-6 py-2.5 bg-neutral-900 font-medium text-sm text-white leading-tight hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-0 active:bg-blue-800 transition duration-150 ease-in-out" %>
   </section>
   <div class="flex flex-col">
-    <h1 class="text-xl font-medium my-5 text-center text-white">Priority Tasks</h1>
+    <h1 class="text-xl font-medium my-5 text-center text-white">Tasks for today</h1>
     <%= render 'tasks/prio_tasks' %>
   </div>
 </div> 

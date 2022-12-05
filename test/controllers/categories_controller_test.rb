@@ -4,6 +4,10 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @category = Category.create(name: "This is name")
+    user = User.create(email: "testing@example.com", password: "password")
+    get '/users/sign_in'
+    sign_in user
+    post user_session_url
   end
 
   test "should get index" do
@@ -26,22 +30,22 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should post create" do
+  test "should create category" do
     post categories_path(@category), params: { category: {name: "Test123654" } }
     assert_response :redirect
   end
 
-  test "should patch edit" do
+  test "should edit category" do
     patch category_path(@category), params: { category: {name: "Test123654" } }
     assert_response :redirect
   end
 
-  test "should destroy delete" do
+  test "should destroy category" do
     delete category_path(@category)
     assert_response :redirect
   end
 
-  test "should go to categories from post category" do
+  test "should go to root path from post category" do
     assert_difference("Category.count") do
       post categories_url, params: { category: {name: "Test123654" } }
     end

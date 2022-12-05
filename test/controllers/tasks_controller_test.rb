@@ -2,16 +2,15 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @category = Category.create(name: "This is name")
+    @category = Category.create(name: "This is category")
     @task = Task.create(title: "Task title", 
                         content: "Task content", 
                         category_id: @category.id, 
-                        priority: "January 1 2023")
-  end
-
-  test "should get index" do
-    get category_tasks_path(@category)
-    assert_response :success
+                        priority: "January 1 2023")          
+    user = User.create(email: "testing@example.com", password: "password")
+    get '/users/sign_in'
+    sign_in user
+    post user_session_url                   
   end
 
   test "should get new" do
@@ -23,47 +22,48 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     get edit_category_task_path(@category, @task)
     assert_response :success
   end
-
-  test "should get show" do
-    get category_task_path(@category, @task)
-    assert_response :success
-  end
   
-  test "should post create" do
-    post category_tasks_path(@category), params: { task: { title: "Testing one", content: "test content" } }
+  test "should create task" do
+    post category_tasks_path(@category, @task), params: { task: { title: "Testing one", 
+                                                                  content: "test content", 
+                                                                  category_id: @category.id, 
+                                                                  priority: (Date.parse "2024-1-1") } }
     assert_response :redirect
   end
 
-  test "should patch edit" do
+  test "should edit task" do
     patch category_task_path(@category, @task), params: { task: { title: "This is title", content: "This is content" }}
     assert_response :redirect
   end
 
-  test "should destroy delete" do
+  test "should destroy task" do
     delete category_task_path(@category, @task)
     assert_response :redirect
   end
 
-  # test "should go to all tasks from post task" do
-  #   assert_difference("Category.count") do
-  #     post category_tasks_path(@category), params: { task: { title: "Title this", content: "Content this", category_id: 1 } }
-  #   end
+  test "should go to all tasks from create task" do
+    assert_difference("Task.count") do
+      post category_tasks_path(@category), params: { task: { title: "Title this", 
+                                                            content: "Content this", 
+                                                            category_id: @category.id, 
+                                                            priority: (Date.parse "2024-1-1") } }
+    end
 
-  #   follow_redirect!
-  #   assert_response :success
-  # end
+    follow_redirect!
+    assert_response :success
+  end
 
-  # test "should go to all tasks from update task" do
-  #   patch category_task_path(@category, @task), params: { task: { title: "Title this", content: "Content this", category_id: 1 } }
-  #   assert_redirected_to category_tasks_path
-  # end
+  test "should go to all tasks from update task" do
+    patch category_task_path(@category, @task), params: { task: { title: "Title this", content: "Content this", category_id: 1 } }
+    assert_redirected_to category_path(@category)
+  end
 
-  # test "should go to all tasks from destroy task" do
-  #   assert_difference("Category.count", - 1) do
-  #     delete category_task_path(@category, @task)
-  #   end
+  test "should go to all tasks from destroy task" do
+    assert_difference("Task.count", - 1) do
+      delete category_task_path(@category, @task)
+    end
 
-  #   follow_redirect!
-  #   assert_response :success
-  # end
+    follow_redirect!
+    assert_response :success
+  end
 end

@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_category
 
   def index
@@ -12,7 +13,7 @@ class TasksController < ApplicationController
   def create
     @task = @category.tasks.build(task_params)
     if @task.save
-      redirect_to category_tasks_path
+      redirect_to category_path(@category)
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +30,7 @@ class TasksController < ApplicationController
   def update
     @task = @category.tasks.find(params[:id])
     if @task.update(task_params)
-      redirect_to category_tasks_path
+      redirect_to category_path(@category)
     else 
       render :edit, status: :unprocessable_entity
     end
@@ -39,7 +40,7 @@ class TasksController < ApplicationController
     @task = @category.tasks.find(params[:id])
     @task.destroy
 
-    redirect_to category_tasks_path
+    redirect_to category_path(@category)
   end
 
   private
