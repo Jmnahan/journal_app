@@ -11,9 +11,9 @@
   </head>
 
   <body>
-    <main class="flex justify-center items-center h-screen w-screen bg-zinc-800">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <main class="flex flex-col justify-center items-center h-screen w-screen bg-zinc-800">
+      <p class="notice text-yellow-500"><%= notice %></p>
+      <p class="alert text-red-500 mb-5"><%= alert %></p>
       <%= yield %>
     </main>
   </body>

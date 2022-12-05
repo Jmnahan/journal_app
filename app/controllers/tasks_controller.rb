@@ -2,10 +2,6 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :get_category
 
-  def index
-    @tasks = @category.tasks
-  end
-
   def new
     @task = @category.tasks.build
   end
@@ -17,10 +13,6 @@ class TasksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @task = @category.tasks.find(params[:id])
   end
 
   def edit
