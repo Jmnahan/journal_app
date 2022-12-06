@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @category.tasks.build(task_params)
+    @task = @category.tasks.build task_params.merge({user: current_user})
     if @task.save
       redirect_to category_path(@category)
     else

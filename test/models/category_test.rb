@@ -1,6 +1,11 @@
 require "test_helper"
 
 class CategoryTest < ActiveSupport::TestCase
+  
+  setup do
+    @user = User.create(email: "testing@example.com", password: "password")    
+  end
+
   test "should not save category without name" do
     category = Category.new
     assert_not category.save, "Saved catergory without name"
@@ -15,10 +20,12 @@ class CategoryTest < ActiveSupport::TestCase
   test "category must be unique" do
     original = Category.new
     original.name = "Monday"
+    original.user = @user
     duplicate = Category.new
     duplicate.name = "Monday"
+    duplicate.user = @user
 
-    assert original.save
+    assert original.save!
     assert Category.pluck(:name).include?(original.name)
     assert_not duplicate.save, "Saved duplicate category"
   end

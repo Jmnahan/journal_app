@@ -2,12 +2,13 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @category = Category.create(name: "This is category")
+    user = User.create(email: "testing@example.com", password: "password")
+    @category = Category.create(name: "This is category", user: user )
     @task = Task.create(title: "Task title", 
                         content: "Task content", 
                         category_id: @category.id, 
-                        priority: "January 1 2023")          
-    user = User.create(email: "testing@example.com", password: "password")
+                        priority: "January 1 2023",
+                        user: user )          
     get '/users/sign_in'
     sign_in user
     post user_session_url                   

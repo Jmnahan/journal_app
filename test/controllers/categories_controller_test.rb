@@ -3,10 +3,10 @@ require "test_helper"
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @category = Category.create(name: "This is name")
-    user = User.create(email: "testing@example.com", password: "password")
+    @user = User.create(email: "testing@example.com", password: "password")
+    @category = Category.create(name: "This is name", user: @user )
     get '/users/sign_in'
-    sign_in user
+    sign_in @user
     post user_session_url
   end
 

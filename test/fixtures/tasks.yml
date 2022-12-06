@@ -6,11 +6,13 @@
 #
 one: 
   title: "Task one"
-  content: "Task one details"
-  category: 1
+  content: "Task one desc"
+  category: one
+  user: one
 
 two: 
-  title: "Task one"
-  content: "Task one details"
-  category: 1
+  title: "Task two"
+  content: "Task two desc"
+  category: two
+  user: two
 
