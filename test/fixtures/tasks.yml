@@ -7,12 +7,14 @@
 one: 
   title: "Task one"
   content: "Task one desc"
+  priority: <%= Date.tomorrow %>
   category: one
   user: one
 
 two: 
   title: "Task two"
   content: "Task two desc"
+  priority: <%= Date.tomorrow %>
   category: two
   user: two
 

@@ -3,11 +3,11 @@ require "test_helper"
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @user = User.create(email: "testing@example.com", password: "password")
-    @category = Category.create(name: "This is name", user: @user )
+    @category = categories(:one)
+    @task = tasks(:one)
     get '/users/sign_in'
-    sign_in @user
-    post user_session_url
+    sign_in users :one
+    post user_session_url 
   end
 
   test "should get index" do

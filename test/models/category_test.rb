@@ -3,7 +3,7 @@ require "test_helper"
 class CategoryTest < ActiveSupport::TestCase
   
   setup do
-    @user = User.create(email: "testing@example.com", password: "password")    
+    @user = users :one   
   end
 
   test "should not save category without name" do

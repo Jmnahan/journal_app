@@ -3,11 +3,8 @@ require "test_helper"
 class TaskTest < ActiveSupport::TestCase
 
   setup do
-    @category = Category.create(name: "This is name")
-    @task = Task.create(title: "Task title", 
-                        content: "Task content", 
-                        category_id: @category.id, 
-                        priority: "2024-1-1")
+    @category = categories :one
+    @task = tasks :one
     @current = DateTime.now                      
   end
 
